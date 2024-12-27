@@ -19,4 +19,4 @@ class Talker(Node):
 def main():
     rclpy.init()
     node = Talker()
-    rclpy.spin(node)a
+    rclpy.spin(node)
