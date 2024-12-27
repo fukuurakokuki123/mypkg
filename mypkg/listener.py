@@ -10,7 +10,6 @@ class Listener(Node):
     def callback(self, msg):
         self.get_logger().info(f'Received workout: {msg.data}')
 
-
 def main():
     rclpy.init()
     node = Listener()
@@ -21,4 +20,3 @@ def main():
     finally:
         node.destroy_node()
         rclpy.shutdown()
-

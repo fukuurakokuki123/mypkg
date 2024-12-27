@@ -15,12 +15,12 @@ class Talker(Node):
         self.timer = self.create_timer(0.5, self.publish_workout)
 
     def publish_workout(self):
+        # ランダムに筋トレ部位を選択
         workout = random.choice(MUSCLE_GROUPS)
         msg = String()
         msg.data = workout
         self.publisher.publish(msg)
         self.get_logger().info(f'Published: {workout}')
-
 
 def main():
     rclpy.init()
