@@ -15,10 +15,9 @@ class Talker(Node):
         self.timer = self.create_timer(0.5, self.publish_workout)
 
     def publish_workout(self):
-        # ランダムに筋トレ部位を選択
         workout = random.choice(MUSCLE_GROUPS)
         msg = String()
-        msg.data = workout
+        msg.data = f"今日は{random.choice(self.exercises)}だぜ、bro"
         self.publisher.publish(msg)
         self.get_logger().info(f'Published: {workout}')
 
