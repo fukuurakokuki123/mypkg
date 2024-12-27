@@ -1,24 +1,24 @@
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import Int16
+from std_msgs.msg import String
 
 
 class Talker(Node):
     def __init__(self):
-       super().__init__("talker")
-       self.pub = self.create_publisher(Int16, "countup", 10)
-       self.n = 0
-       self.create_timer(0.5, self.cb)
+        super().__init__("talker")
+        self.pub = self.create_publisher(String, "question", 10)
+        self.create_timer(1.0, self.publish_question)
 
-       
-    def cb(self):
-        msg = Int16()
-        msg.data = self.n
+    def publish_question(self):
+        msg = String()
+        msg.data = "今日の筋トレは何をやるんだ？"
+        self.get_logger().info(f"Talker: {msg.data}")
         self.pub.publish(msg)
-        self.n += 1
 
 
 def main():
     rclpy.init()
     node = Talker()
     rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
