@@ -20,5 +20,3 @@ def main():
     rclpy.init()
     node = Talker()
     rclpy.spin(node)
-    node.destroy_node()
-    rclpy.shutdown()
