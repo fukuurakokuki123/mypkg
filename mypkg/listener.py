@@ -1,22 +1,20 @@
-import rclpy
+mport rclpy
 from rclpy.node import Node
-from std_msgs.msg import String
+from person_msgs.msg import Person
+from std_msgs.msg import Int16
 
-class Listener(Node):
-    def __init__(self):
-        super().__init__('listener')
-        self.subscription = self.create_subscription(String, 'workout', self.callback, 10)
 
-    def callback(self, msg):
-        self.get_logger().info(f'Received workout: {msg.data}')
+rclpy.init()
+node = Node("listener")
+
+
+def cb(msg):
+    global node
+    node.get_logger().info("Listen: %s" % msg)
+    node.get_logger().info("Listen: %d" % msg.data)
+
 
 def main():
-    rclpy.init()
-    node = Listener()
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        pass
-    finally:
-        node.destroy_node()
-        rclpy.shutdown()
+    pub = node.create_subscription(Person, "person", cb, 10)
+    pub = node.create_subscription(Int16, "countup", cb, 10)
+    rclpy.spin(node)

@@ -1,33 +1,37 @@
-import rclpy
+mport rclpy
 from rclpy.node import Node
-from std_msgs.msg import String
-import random
+from person_msgs.msg import Person
+from std_msgs.msg import Int16 
 
-MUSCLE_GROUPS = [
-    "大胸筋", "僧帽筋", "上腕三頭筋", "広背筋", "大臀筋",
-    "大腿二頭筋", "下腿三頭筋", "三角筋", "上腕二頭筋", "腹直筋", "大腿四頭筋"
-]
+rclpy.init()
+node = Node("talker")
+pub = node.create_publisher(Person, "person", 10)
+n = 0
 
 class Talker(Node):
     def __init__(self):
-        super().__init__('talker')
-        self.publisher = self.create_publisher(String, 'workout', 10)
-        self.timer = self.create_timer(0.5, self.publish_workout)
+        super().__init__("talker")
+        self.pub = self.create_publisher(Int16, "countup" , 10)
+        self.n = 0
+        self.create_timer(0.5,self.cb)
+    
 
-    def publish_workout(self):
-        workout = random.choice(MUSCLE_GROUPS)
-        msg = String()
-        msg.data = f"今日は{random.choice(self.exercises)}だぜ、bro"
-        self.publisher.publish(msg)
-        self.get_logger().info(f'Published: {workout}')
+def cb():
+    global n
+    msg = Person()
+    msg.name = "福浦功己"
+    msg.age = n
+    pub.publish(msg)
+    n += 1
+    def cb(self):
+        msg = Int16()
+        msg.data = self.n
+        self.pub.publish(msg)
+        self.n += 1
+
 
 def main():
+    node.create_timer(0.5, cb)
     rclpy.init()
     node = Talker()
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        pass
-    finally:
-        node.destroy_node()
-        rclpy.shutdown()
+    rclpy.spin(node)
