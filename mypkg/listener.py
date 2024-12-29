@@ -1,28 +1,17 @@
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import String
-import random
+from std_msgs.msg import Int16
 
 
-class Listener(Node):
-    def __init__(self):
-        super().__init__("listener")
-        self.sub = self.create_subscription(String, "question", self.respond, 10)
+rclpy.init()
+node = Node("listener")
 
-    def respond(self, msg):
-        self.get_logger().info(f"Listener: 質問を受信しました -> {msg.data}")
 
-        muscle_groups = [
-            "大胸筋", "僧帽筋", "上腕三頭筋", "広背筋", "大臀筋",
-            "大腿二頭筋", "下腿三頭筋", "三角筋", "上腕二頭筋", 
-            "腹直筋", "大腿四頭筋"
-        ]
-
-        selected_muscle = random.choice(muscle_groups)
-        self.get_logger().info(f"Listener: 今日の筋トレ部位は「{selected_muscle}」です！")
+def cb(msg):
+    global node
+    node.get_logger().info("Listen: %d" % msg.data)
 
 
 def main():
-    rclpy.init()
-    node = Listener()
+    sub = node.create_subscription(Int16, "countup", cb, 10)
     rclpy.spin(node)

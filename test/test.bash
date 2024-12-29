@@ -1,26 +1,20 @@
 #!/bin/bash
 
-# ディレクトリを設定
 dir=~
 [ "$1" != "" ] && dir="$1"
 
-# ROS2 ワークスペースに移動
 cd $dir/ros2_ws
 
-# ビルド
 colcon build
 source $dir/.bashrc
 source /opt/ros/humble/setup.bash
 
-# ローンチファイルを実行し、ログを確認
-timeout 30 ros2 launch mypkg talk_listen.launch.py | tee /tmp/mypkg.log
+timeout 10 ros2 run mypkg talker > /tmp/mypkg_talker.log
 
-# ログファイルの最後の20行を表示
-tail -n 20 /tmp/mypkg.log
+tail -n 20 /tmp/mypkg_talker.log
 
-# ログ内に「Listen: 10」があるか確認
-if grep -q 'Listen: 10' /tmp/mypkg.log; then
-  echo "Listen: 10 がログにあります。成功です。"
+if grep -q "今日の筋トレ部位" /tmp/mypkg_talker.log; then
+  echo "Talkerノードが有用なデータを発信しています。成功です。"
 else
-  echo "Listen: 10 がログに見つかりません。エラーです。"
+  echo "Talkerノードが有用なデータを発信していません。エラーです。"
 fi
