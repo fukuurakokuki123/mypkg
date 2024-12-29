@@ -8,7 +8,8 @@ class Talker(Node):
     def __init__(self):
         super().__init__("talker")
         self.pub = self.create_publisher(String, "question", 10)
-        self.create_timer(1.0, self.publish_question)
+        self.current_date = datetime.datetime(2024, 12, 29)
+        self.create_timer(1.0, self.publish_question)  
 
     def publish_question(self):
         muscle_groups = [
@@ -17,7 +18,7 @@ class Talker(Node):
             "腹直筋", "大腿四頭筋"
         ]
         
-        today = datetime.datetime.now().strftime("%Y-%m-%d")
+        today = self.current_date.strftime("%Y-%m-%d")
 
         selected_muscle = random.choice(muscle_groups)
 
@@ -27,6 +28,8 @@ class Talker(Node):
         self.get_logger().info(f"Talker: {msg.data}")
         
         self.pub.publish(msg)
+
+        self.current_date += datetime.timedelta(days=1)
 
 def main():
     rclpy.init()
