@@ -1,3 +1,3 @@
 # mypkg
 課題２
-#Today's training select コマンド
+# Today's training select コマンド
