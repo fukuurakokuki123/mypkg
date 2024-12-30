@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2024 Kouki Fukuura
-# SPDX-License-Identifier: BSD-3-Clauseimport rclpy
+# SPDX-License-Identifier: BSD-3-Clauseimport 
 
 import rclpy
 from rclpy.node import Node
