@@ -11,3 +11,5 @@
 筋トレ計画をランダムに生成し、トピック workout_plan に定期的にパブリッシュするノード。
 
 # トピック
+workout_plan
+workout_publisher.py ノードが「workout_plan」トピックに情報を送信します。
