@@ -12,4 +12,5 @@
 
 # トピック
 workout_plan
+
 workout_publisher.py ノードが「workout_plan」トピックに情報を送信します。
