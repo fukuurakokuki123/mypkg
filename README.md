@@ -20,3 +20,4 @@ workout_publisher.py ノードが「workout_plan」トピックに情報を送�
 #### 端末1
      $ ros2 run mypkg workout_publisher
 #### 端末2
+     $ ros2 topic echo workout_plan
