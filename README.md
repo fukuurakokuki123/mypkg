@@ -47,3 +47,4 @@ workout_publisher.py ノードが「workout_plan」トピックに情報を送�
 ・ROS 2 Foxy
 
 ## テスト環境
+・ubuntu-22.04
