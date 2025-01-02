@@ -43,4 +43,5 @@ workout_publisher.py ノードが「workout_plan」トピックに情報を送�
      data: '日付: 2025-01-12 | 筋トレ部位: 広背筋 | トレーニング: ラットプルダウン: 3セット × 10回'
 ## 必要なソフトウェア
 ・python
+
 ・ROS 2 Foxy
