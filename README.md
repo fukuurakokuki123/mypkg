@@ -48,3 +48,4 @@ workout_publisher.py ノードが「workout_plan」トピックに情報を送�
 
 ## テスト環境
 ・ubuntu-22.04
+## 著作権・ライセンス
