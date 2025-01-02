@@ -17,3 +17,4 @@ workout_publisher.py ノードが「workout_plan」トピックに情報を送�
 
 ## コマンドと実行例
 ### 例
+### 端末1
