@@ -16,6 +16,6 @@
 workout_publisher.py ノードが「workout_plan」トピックに情報を送信します。
 
 ## コマンドと実行例
-### 例
-### 端末1
+#### 例
+#### 端末1
      $ ros2 run mypkg workout_publisher
