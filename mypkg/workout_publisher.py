@@ -1,6 +1,8 @@
 # SPDX-FileCopyrightText: 2024 Kouki Fukuura
-# SPDX-License-Identifier: BSD-3-Clause 
+# SPDX-License-Identifier: BSD-3-Clause
 
+import os
+import sys
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
@@ -10,14 +12,18 @@ from datetime import datetime, timedelta
 class WorkoutPublisher(Node):
     def __init__(self):
         super().__init__("workout_publisher")
+        
+        sys.stdout = open(os.devnull, 'w')
+        sys.stderr = open(os.devnull, 'w')
+
         self.publisher_ = self.create_publisher(String, "workout_plan", 10)
-        
-        # 開始日付を「2024年12月30日」に設定
+
         self.current_date = datetime(2024, 12, 30)
-        
+
         self.timer = self.create_timer(2.0, self.publish_workout_plan)
 
     def publish_workout_plan(self):
+
         workouts = {
             "大胸筋": "ベンチプレス: 3セット × 10回",
             "僧帽筋": "シュラッグ: 3セット × 15回",
@@ -40,8 +46,6 @@ class WorkoutPublisher(Node):
         workout_message.data = f"日付: {date_str} | 筋トレ部位: {muscle} | トレーニング: {exercise}"
 
         self.publisher_.publish(workout_message)
-
-        self.get_logger().info(f"Published: {workout_message.data}")
 
         self.current_date += timedelta(days=1)
 
