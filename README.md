@@ -44,7 +44,7 @@ workout_publisher ノードが「workout_plan」トピックに情報を送信�
 ## 必要なソフトウェア
 - python
 
-- ROS 2 Foxy
+- ROS 2 humble
 
 ## テスト環境
 - ubuntu-22.04
